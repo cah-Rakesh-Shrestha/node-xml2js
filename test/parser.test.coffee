@@ -353,6 +353,14 @@ module.exports =
       assert.notEqual err, null
       test.finish()
 
+  'test element with datetime': (test) ->
+    x2js = new xml2js.Parser()
+    xmlString = "<DateTime>2020-02-04T00:00:00+11:00</DateTime>"
+    x2js.parseString xmlString, (err, parsed) ->
+      assert.equal err, null
+      assert.equal parsed.DateTime, '2020-02-04T00:00:00+11:00'
+      test.finish()
+
   'test simple function without options': (test) ->
     fs.readFile fileName, (err, data) ->
       xml2js.parseString data, (err, r) ->
